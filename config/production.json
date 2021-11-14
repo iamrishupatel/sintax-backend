@@ -1,0 +1,6 @@
+{
+  "host": "sintax-backend-app.feathersjs.com",
+  "port": "PORT",
+  "mongodb" : "MONGO_URL"
+
+}
