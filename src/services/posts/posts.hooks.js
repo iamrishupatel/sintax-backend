@@ -2,6 +2,8 @@ const { authenticate } = require("@feathersjs/authentication").hooks;
 
 const handleImage = require("../../hooks/handle-image");
 
+const addPostToUser = require("../../hooks/add-post-to-user");
+
 module.exports = {
   before: {
     all: [authenticate("jwt")],
@@ -17,7 +19,7 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [],
+    create: [addPostToUser()],
     update: [],
     patch: [],
     remove: [],
