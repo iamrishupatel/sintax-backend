@@ -2,6 +2,7 @@ const { authenticate } = require("@feathersjs/authentication").hooks;
 
 const { hashPassword, protect } =
   require("@feathersjs/authentication-local").hooks;
+const handleImage = require("../../hooks/handle-image");
 
 module.exports = {
   before: {
@@ -10,7 +11,7 @@ module.exports = {
     get: [authenticate("jwt")],
     create: [hashPassword("password")],
     update: [hashPassword("password"), authenticate("jwt")],
-    patch: [hashPassword("password"), authenticate("jwt")],
+    patch: [hashPassword("password"), authenticate("jwt"), handleImage()],
     remove: [authenticate("jwt")],
   },
 
