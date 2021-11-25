@@ -6,9 +6,20 @@ module.exports = function (app) {
   const modelName = "communities";
   const mongooseClient = app.get("mongooseClient");
   const { Schema } = mongooseClient;
+  const { ObjectId } = mongooseClient.Schema;
+
   const schema = new Schema(
     {
-      text: { type: String, required: true },
+      name: { type: String, required: true, trim: true, maxLength: 48 },
+      photoUrl: { type: String },
+      description: { type: String, maxLength: 256 },
+      messages: [
+        {
+          createdAt: { type: Date, default: Date.now },
+          body: { type: String, required: true },
+          createdBy: { type: ObjectId, ref: "users", required: true },
+        },
+      ],
     },
     {
       timestamps: true,
