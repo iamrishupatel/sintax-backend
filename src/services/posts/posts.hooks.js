@@ -1,11 +1,13 @@
 const { authenticate } = require("@feathersjs/authentication").hooks;
 
+const handleImage = require("../../hooks/handle-image");
+
 module.exports = {
   before: {
     all: [authenticate("jwt")],
     find: [],
     get: [],
-    create: [],
+    create: [handleImage()],
     update: [],
     patch: [],
     remove: [],
