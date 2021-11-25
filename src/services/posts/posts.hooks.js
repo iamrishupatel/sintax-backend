@@ -1,8 +1,8 @@
 const { authenticate } = require("@feathersjs/authentication").hooks;
 
 const handleImage = require("../../hooks/handle-image");
-
 const addPostToUser = require("../../hooks/add-post-to-user");
+const removePostFromUser = require("../../hooks/remove-post-from-user");
 
 module.exports = {
   before: {
@@ -22,7 +22,7 @@ module.exports = {
     create: [addPostToUser()],
     update: [],
     patch: [],
-    remove: [],
+    remove: [removePostFromUser()],
   },
 
   error: {
