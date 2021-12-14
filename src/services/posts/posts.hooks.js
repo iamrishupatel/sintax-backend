@@ -4,6 +4,8 @@ const handleImage = require("../../hooks/handle-image");
 const addPostToUser = require("../../hooks/add-post-to-user");
 const removePostFromUser = require("../../hooks/remove-post-from-user");
 
+const populateUser = require("../../hooks/populate-user");
+
 module.exports = {
   before: {
     all: [authenticate("jwt")],
@@ -16,7 +18,7 @@ module.exports = {
   },
 
   after: {
-    all: [],
+    all: [populateUser()],
     find: [],
     get: [],
     create: [addPostToUser()],
