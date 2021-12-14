@@ -34,10 +34,10 @@ module.exports = function (app) {
             required: true,
           },
           createdAt: { type: Date, default: Date.now },
-          postedBy: { type: ObjectId, ref: "users", required: true },
+          author: { type: ObjectId, ref: "users", required: true },
         },
       ],
-      postedBy: {
+      author: {
         type: ObjectId,
         ref: "users",
       },

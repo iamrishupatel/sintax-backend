@@ -9,10 +9,10 @@ module.exports = (options = {}) => {
     const addUser = async (post) => {
       const user = await app
         .service("users")
-        .get(post.postedBy.toString(), params);
+        .get(post.author.toString(), params);
       return {
         ...post,
-        postedBy: {
+        author: {
           _id: user._id,
           firstName: user.firstName,
           lastName: user.lastName,

@@ -17,7 +17,7 @@ module.exports = function (app) {
         {
           createdAt: { type: Date, default: Date.now },
           body: { type: String, required: true },
-          createdBy: { type: ObjectId, ref: "users", required: true },
+          author: { type: ObjectId, ref: "users", required: true },
         },
       ],
     },

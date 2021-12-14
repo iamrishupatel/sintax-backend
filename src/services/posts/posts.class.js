@@ -7,7 +7,7 @@ exports.Posts = class Posts extends Service {
   }
   async create(data, params) {
     if (data.body || data.photo.url) {
-      data.postedBy = params.user._id;
+      data.author = params.user._id;
       return super.create(data, params);
     } else throw new BadRequest("Can't create an empty post");
   }
@@ -16,7 +16,7 @@ exports.Posts = class Posts extends Service {
       const post = await this.app.service("posts").get(id, params);
       // check if `post` is uploaded by the authenticated user
       // if not throw error
-      if (post.postedBy._id.toString() === params.user._id.toString()) {
+      if (post.author._id.toString() === params.user._id.toString()) {
         return super.remove(id, params);
       } else {
         throw new Forbidden(
