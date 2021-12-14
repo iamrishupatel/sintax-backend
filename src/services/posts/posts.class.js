@@ -6,7 +6,7 @@ exports.Posts = class Posts extends Service {
     this.app = app;
   }
   async create(data, params) {
-    if (data.body || data.photoUrl) {
+    if (data.body || data.photo.url) {
       data.postedBy = params.user._id;
       return super.create(data, params);
     } else throw new BadRequest("Can't create an empty post");
