@@ -4,8 +4,6 @@
 // for more of what you can do here.
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
-const uniqueValidator = require("mongoose-unique-validator");
-
 module.exports = function (app) {
   const modelName = "users";
   const mongooseClient = app.get("mongooseClient");
@@ -26,6 +24,7 @@ module.exports = function (app) {
         required: [true, "username is required"],
         trim: true,
         lowercase: true,
+        unique: true,
       },
       photoUrl: {
         type: String,
@@ -64,7 +63,6 @@ module.exports = function (app) {
     }
   );
 
-  schema.plugin(uniqueValidator);
   // This is necessary to avoid model compilation errors in watch mode
   // see https://mongoosejs.com/docs/api/connection.html#connection_Connection-deleteModel
   if (mongooseClient.modelNames().includes(modelName)) {
