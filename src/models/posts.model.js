@@ -27,16 +27,7 @@ module.exports = function (app) {
           ref: "users",
         },
       ],
-      comments: [
-        {
-          body: {
-            type: String,
-            required: true,
-          },
-          createdAt: { type: Date, default: Date.now },
-          author: { type: ObjectId, ref: "users", required: true },
-        },
-      ],
+      comments: [{ type: ObjectId, ref: "comments" }],
       author: {
         type: ObjectId,
         ref: "users",
