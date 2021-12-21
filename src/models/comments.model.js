@@ -8,7 +8,11 @@ module.exports = function (app) {
   const { Schema } = mongooseClient;
   const schema = new Schema(
     {
-      text: { type: String, required: true },
+      body: { type: String, required: true },
+      author: { type: Schema.ObjectId, ref: "users", required: true },
+      children: [{ type: Schema.ObjectId, ref: "comments" }],
+      parentId: { type: String, required: true },
+      type: { type: String, required: true },
     },
     {
       timestamps: true,
