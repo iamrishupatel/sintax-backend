@@ -6,6 +6,8 @@ const removePostFromUser = require("../../hooks/remove-post-from-user");
 
 const populateUser = require("../../hooks/populate-user");
 
+const populateComments = require("../../hooks/populate-comments");
+
 module.exports = {
   before: {
     all: [authenticate("jwt")],
@@ -19,8 +21,8 @@ module.exports = {
 
   after: {
     all: [populateUser()],
-    find: [],
-    get: [],
+    find: [populateComments()],
+    get: [populateComments()],
     create: [addPostToUser()],
     update: [],
     patch: [],
