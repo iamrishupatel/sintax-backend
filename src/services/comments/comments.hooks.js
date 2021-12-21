@@ -1,5 +1,7 @@
 const { authenticate } = require("@feathersjs/authentication").hooks;
 
+const addCommentToParent = require("../../hooks/add-comment-to-parent");
+
 module.exports = {
   before: {
     all: [authenticate("jwt")],
@@ -15,7 +17,7 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [],
+    create: [addCommentToParent()],
     update: [],
     patch: [],
     remove: [],
