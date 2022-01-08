@@ -1,6 +1,5 @@
 {
-  "host": "sintax-backend-app.feathersjs.com",
+  "host": "https://sintax-server.herokuapp.com/",
   "port": "PORT",
-  "mongodb" : "MONGO_URL"
-
+  "mongodb": "MONGO_URL"
 }
