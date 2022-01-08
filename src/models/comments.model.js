@@ -12,7 +12,7 @@ module.exports = function (app) {
       author: { type: Schema.ObjectId, ref: "users", required: true },
       children: [{ type: Schema.ObjectId, ref: "comments" }],
       parentId: { type: String, required: true },
-      type: { type: String, required: true },
+      type: { type: String, required: true, enum: ["comment", "reply"] },
     },
     {
       timestamps: true,
