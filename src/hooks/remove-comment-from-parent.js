@@ -5,13 +5,10 @@
 module.exports = (options = {}) => {
   return async (context) => {
     const { app, result, params } = context;
-    console.log(result);
-
     if (result.type === "comment") {
       try {
         const post = await app.service("posts").get(result.parentId, params);
         const { comments } = post;
-        console.log(comments);
         const myData = {
           comments: comments.filter((comment) => {
             if (comment) {
@@ -25,7 +22,6 @@ module.exports = (options = {}) => {
       }
     }
     if (result.type === "reply") {
-      console.log("HIT REPLY");
       try {
         const comment = await app
           .service("comments")
