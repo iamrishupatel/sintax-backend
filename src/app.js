@@ -29,7 +29,12 @@ app.use(
     contentSecurityPolicy: false,
   })
 );
-app.use(cors());
+var corsOptions = {
+  origin: "https://sintax.rishupatel.in",
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 app.use(compress());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
