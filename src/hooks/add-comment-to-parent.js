@@ -6,48 +6,36 @@ module.exports = (options = {}) => {
   return async (context) => {
     // add comment & replies to their respective parents
     const { app, params, result } = context;
-    const { query } = params;
-    // check if parent ID is provided
-    if (query.parentId === undefined) {
-      app.service("comments").remove(result._id, params);
-      throw new Error("Please provide a parent Id");
-    }
 
-    const parentId = query.parentId.toString();
-
-    if (query.type === "comment") {
+    if (result.type === "comment") {
       try {
-        const post = await app.service("posts").get(parentId, params);
+        const post = await app.service("posts").get(result.parentId, params);
         const { comments } = post;
         const myData = {
           comments: [...comments, result._id],
         };
-        app.service("posts").patch(parentId, myData, params);
+        await app.service("posts").patch(result.parentId, myData, params);
       } catch (e) {
         // remove comment from db if it was not attached to its parent
-        app.service("comments").remove(result._id, params);
+        await app.service("comments").remove(result._id, params);
         throw new Error("Please provide correct parent Id");
       }
-    } else if (query.type === "reply") {
+    } else if (result.type === "reply") {
       try {
-        const comment = await app.service("comments").get(parentId, params);
+        const comment = await app
+          .service("comments")
+          .get(result.parentId, params);
         const { children } = comment;
 
         const myData = {
           children: [...children, result._id],
         };
-        app.service("comments").patch(parentId, myData, params);
+        await app.service("comments").patch(result.parentId, myData, params);
       } catch (e) {
         // remove comment from db if it was not attached to its parent
-        app.service("comments").remove(result._id, params);
+        await app.service("comments").remove(result._id, params);
         throw new Error("Please provide correct parent Id");
       }
-    }
-    // in all other case cases
-    else {
-      // remove comment from db if it was not attached to its parent
-      app.service("comments").remove(result._id, params);
-      throw new Error("Please provide correct comment Type");
     }
     // console.log(context.result);
     return context;

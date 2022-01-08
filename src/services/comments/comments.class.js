@@ -6,8 +6,6 @@ exports.Comments = class Comments extends Service {
   }
   async create(data, params) {
     data.author = params.user._id;
-    data.parentId = params.query.parentId;
-    data.type = params.query.type;
     return super.create(data, params);
   }
   async patch(id, data, params) {
