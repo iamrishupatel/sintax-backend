@@ -18,7 +18,7 @@ module.exports = (options = {}) => {
         const uri = dauria.getBase64DataURI(file.buffer, file.mimetype);
         const uploadedPhoto = await uploadImage({
           file: uri,
-          folder: "sintax/posts",
+          folder: app.get("postFolderPath"),
         });
         context.data.photo = {
           url: uploadedPhoto.secure_url,
@@ -35,7 +35,7 @@ module.exports = (options = {}) => {
 
           const uploadedPhoto = await uploadImage({
             file: uri,
-            folder: "sintax/users",
+            folder: app.get("userFolderPath"),
           });
           context.data.photoUrl = uploadedPhoto.secure_url;
         }
@@ -45,7 +45,7 @@ module.exports = (options = {}) => {
 
           const uploadedPhoto = await uploadImage({
             file: uri,
-            folder: "sintax/users",
+            folder: app.get("userFolderPath"),
           });
           context.data.coverUrl = uploadedPhoto.secure_url;
         }
