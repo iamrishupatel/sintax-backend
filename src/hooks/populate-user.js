@@ -3,15 +3,20 @@
 
 // eslint-disable-next-line no-unused-vars
 module.exports = (options = {}) => {
+  /*
+   * add author object to any resource which has an author id
+   */
   return async (context) => {
     const { app, method, result, params } = context;
-    // function that adds user to a single post object
-    const addUser = async (post) => {
+
+    // function that adds user or author to a single resource
+
+    const addUser = async (resource) => {
       const user = await app
         .service("users")
-        .get(post.author.toString(), params);
+        .get(resource.author.toString(), params);
       return {
-        ...post,
+        ...resource,
         author: {
           _id: user._id,
           firstName: user.firstName,
