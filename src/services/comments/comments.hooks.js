@@ -2,6 +2,7 @@ const { authenticate } = require("@feathersjs/authentication").hooks;
 
 const addCommentToParent = require("../../hooks/add-comment-to-parent");
 const removeCommentFromParent = require("../../hooks/remove-comment-from-parent");
+const populateUser = require("../../hooks/populate-user");
 
 module.exports = {
   before: {
@@ -18,7 +19,7 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [addCommentToParent()],
+    create: [addCommentToParent(), populateUser()],
     update: [],
     patch: [],
     remove: [removeCommentFromParent()],
