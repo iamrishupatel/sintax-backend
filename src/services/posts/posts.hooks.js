@@ -21,7 +21,7 @@ module.exports = {
 
   after: {
     all: [populateUser()],
-    find: [populateComments()],
+    find: [],
     get: [populateComments()],
     create: [addPostToUser()],
     update: [],

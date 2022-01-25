@@ -47,39 +47,8 @@ module.exports = (options = {}) => {
       }
     };
 
-    const addOneComment = async (post) => {
-      let { comments } = post;
-      if (comments.length === 0 || !comments) {
-        return post;
-      }
-      comments = comments.filter((comment) => comment !== null);
-      let comment;
-      /*
-        first element in the comments might be deleted so
-        - run a loop until an element is found
-        - if element is found break the loop
-      */
-      for (let i = 0; i < comments.length; i++) {
-        try {
-          comment = await getComment(comments[i]);
-          comment.author = await getAuthor(comment.author);
-          comment.children = [];
-          break;
-        } catch (error) {
-          // TODO: use winston insted
-          console.log(error.code);
-        }
-      }
-      return {
-        ...post,
-        comments: [comment],
-      };
-    };
-
     if (method === "find") {
-      // we will not send all comments when all post are requested
-      // so we just populate one comment to every post object
-      context.result.data = await Promise.all(result.data.map(addOneComment));
+      // we will not poplate comments when all post are requested
       return context;
     } else {
       // When only one post is requested by the client
