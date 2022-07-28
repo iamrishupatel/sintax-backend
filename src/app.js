@@ -29,8 +29,8 @@ app.use(
     contentSecurityPolicy: false,
   })
 );
-var corsOptions = {
-  origin: "https://sintax.rishupatel.in",
+const corsOptions = {
+  origin: [app.get("origin"), app.get("origin-two")],
   optionsSuccessStatus: 200,
 };
 

@@ -3,5 +3,7 @@
   "port": "PORT",
   "mongodb": "MONGO_URL",
   "postFolderPath": "sintax/posts",
-  "userFolderPath": "sintax/user"
+  "userFolderPath": "sintax/user",
+  "origin": "ORIGIN",
+  "origni-two": "ORIGIN_TWO"
 }

@@ -27,5 +27,7 @@
   },
   "mongodb": "mongodb://localhost:27017/sintax_backend",
   "postFolderPath": "sintax_test/posts",
-  "userFolderPath": "sintax_test/user"
+  "userFolderPath": "sintax_test/user",
+  "origin": "ORIGIN",
+  "origni-two": "ORIGIN_TWO"
 }
